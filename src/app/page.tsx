@@ -12,7 +12,7 @@ type Message = {
 const SYSTEM_PROMPT: Message = {
   role: 'system',
   content: 'You are a helpful assistant. ' +
-    "After generating an image, reply only with 'Done'."
+    "If you generate an image, reply only with 'Done'."
 };
 
 const MAX_LENGTH = Number(process.env.NEXT_PUBLIC_MAX_INPUT_LENGTH) || 4000;
