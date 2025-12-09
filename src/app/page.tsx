@@ -3,6 +3,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { CgSpinner } from 'react-icons/cg';
 import { PiPaperPlaneRightFill } from 'react-icons/pi';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/stackoverflow-dark.css';
 
 type Message = {
   role: 'system' | 'user' | 'assistant';
@@ -88,9 +92,10 @@ export default function Home() {
                 }`}
             >
               <div
-                className={`rounded-lg px-4 py-2 max-w-xl ${msg.role === 'user'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-700 text-gray-100'
+                className={`rounded-lg px-4 py-2 max-w-full md:max-w-xl
+                  ${msg.role === 'user'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-700 text-gray-100'
                   }`}
               >
                 {msg.content.startsWith('data:image') ? (
@@ -101,7 +106,20 @@ export default function Home() {
                   />
                 ) : (
                   <div className='whitespace-pre-wrap wrap-anywhere'>
-                    {msg.content.trim()}
+                    {msg.role === 'assistant' ? (
+                      <div className='raw-container'>
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm]}
+                          rehypePlugins={[rehypeHighlight]}
+                        >
+                          {msg.content.trim()}
+                        </ReactMarkdown>
+                      </div>
+                    ) : (
+                      <>
+                        {msg.content.trim()}
+                      </>
+                    )}
                   </div>
                 )}
               </div>
