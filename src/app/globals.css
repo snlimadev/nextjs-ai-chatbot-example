@@ -25,7 +25,41 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.raw-container * {
-  all: revert;
-  margin: 0;
+.raw-container {
+  overflow-x: auto;
 }
+
+  .raw-container * {
+    all: revert;
+    margin: 0;
+  }
+
+  .raw-container a {
+    color: lightblue;
+  }
+
+  .raw-container blockquote,
+  .raw-container ol,
+  .raw-container ul {
+    white-space: normal;
+  }
+
+  .raw-container blockquote {
+    border-left: 4px solid lightgray;
+    padding-left: 12px;
+  }
+
+  .raw-container table {
+    width: max-content;
+    border-collapse: collapse;
+  }
+
+  .raw-container td,
+  .raw-container th {
+    border: 1px solid lightgray;
+    padding: 5px;
+  }
+
+  .raw-container th {
+    background-color: gray;
+  }
